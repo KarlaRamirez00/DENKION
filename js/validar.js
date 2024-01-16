@@ -92,3 +92,47 @@ if(Nombre == ''){
     document.getElementById("ContactoForm").submit();
 }
 }
+
+function caracterLogin(){
+    var correo = "inputEmail1";
+    var pass = "inputContra1";
+
+    var result1= text.includes("@");
+
+    var result2 = text.includes(".com"); 
+
+    var result3 = text.includes(".cl");
+
+    var resultado_final = false;
+    
+    if(result1 && (result2 || result3))
+        resultado_final = true
+    else if() /*numero min y MAY minimo 8 caracteres*/
+}
+/*
+
+
+
+
+var resultado_final = false;
+
+
+
+//if(result && (result2 || result3))
+
+// resultado_final = true
+
+  
+
+var numero = "12345";
+
+
+
+if(!isNaN(numero))
+
+ resultado_final = true
+
+
+
+document.getElementById("demo").innerHTML = resultado_final;
+*/
