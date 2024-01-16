@@ -1,4 +1,4 @@
-function login(){ 
+/*function login(){ 
     event.preventDefault();var usuario  = document.getElementById("inputEmail1").value;var password = document.getElementById("inputContra1").value;
     
 // alert("Usuario: "+usuario+", Password: "+password);
@@ -15,6 +15,7 @@ function login(){
     }
       
 }
+*/
 
 function registrar(){
     event.preventDefault(); //Sirve para prevenir el comportamiento por defecto 
@@ -93,46 +94,39 @@ if(Nombre == ''){
 }
 }
 
-function caracterLogin(){
-    var correo = "inputEmail1";
-    var pass = "inputContra1";
+function caracterLogin() {
+    var id_correo = document.getElementById("inputEmail1").value;
+    var id_pass = document.getElementById("inputContra1").value;
 
-    var result1= text.includes("@");
+    var result1 = id_correo.includes("@");
+    var result2 = id_correo.includes(".com"); 
+    var result3 = id_correo.includes(".cl");
 
-    var result2 = text.includes(".com"); 
+    var resultado_final_correo = false;
+    var resultado_final_pass = false;
 
-    var result3 = text.includes(".cl");
-
-    var resultado_final = false;
+    var pass = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{8,15}$/;
     
-    if(result1 && (result2 || result3))
-        resultado_final = true
-    else if() /*numero min y MAY minimo 8 caracteres*/
+    if (result1 && (result2 || result3)) {
+        resultado_final_correo = true;
+    }
+
+    if (id_pass.match(pass)) {
+        resultado_final_pass = true;
+    }
+
+    if (resultado_final_correo && resultado_final_pass) {
+        alert('Login exitoso.');
+        document.getElementById("valido").innerHTML = "Válido";
+        return true;
+    } else {
+        alert('Login incorrecto.');
+        document.getElementById("valido").innerHTML = "Inválido";
+        return false;
+    }
 }
-/*
 
 
 
 
-var resultado_final = false;
 
-
-
-//if(result && (result2 || result3))
-
-// resultado_final = true
-
-  
-
-var numero = "12345";
-
-
-
-if(!isNaN(numero))
-
- resultado_final = true
-
-
-
-document.getElementById("demo").innerHTML = resultado_final;
-*/
