@@ -1,4 +1,4 @@
-function login(){ 
+/*function login(){ 
     event.preventDefault();var usuario  = document.getElementById("inputEmail1").value;var password = document.getElementById("inputContra1").value;
     
 // alert("Usuario: "+usuario+", Password: "+password);
@@ -15,81 +15,161 @@ function login(){
     }
       
 }
+*/
 
-function registrar(){
-    event.preventDefault(); //Sirve para prevenir el comportamiento por defecto 
-    //Tomar cada variable del registro 
-    var nombre = document.getElementById("inputName1").value;
-    var apellido = document.getElementById("inputLastName1").value;
-    var rut = document.getElementById("inputRut1").value;
-    var dv = document.getElementById("inputDv1").value;
-    var dire = document.getElementById("inputDireccion1").value;
-    var ciudad = document.getElementById("inputCiudad1").value;
-    var region = document.getElementById("inputRegion1").value;
-    var correo = document.getElementById("inputEmail2").value;
-    var tele = document.getElementById("inputTelefono1").value;
-    var pass1 = document.getElementById("inputPassword1").value;
-    var pass2 = document.getElementById("inputPassword2").value;
 
-    //Crear mensaje visible en la consola, para ver si registra todo ok. (Esto es al inspeccionar)
-    console.log("Mensaje desde la consola: ");
-    console.log("Nombre: "+nombre+", Apellido: "+apellido+", Rut: "+rut+", Dv: "+dv+", Dirección: "+dire+", Ciudad: "+ciudad+",Región: "+region+"Correo: "+correo+"Teléfono: "+tele+"Contraseña 1: "+pass1+"Contraseña 2: "+pass2);
+function caracterLogin() {
+    event.preventDefault();
+    var id_correo = document.getElementById("inputEmail1").value;
+    var id_pass = document.getElementById("inputContra1").value;
 
-    //Validar con los if, que exista algún caracter dentro de las variables
-    if(nombre == ''){
-        alert("El nombre no puede estar vacío.");
-    }else if(apellido == ''){
-        alert("El apellido no puede estar vacío.");
-    }else if(rut == ''){
-        alert("El rut no puede estar vacío.");
-    }else if(dv == ''){
-        alert("El dígito verificador no puede estar vacío.");
-    }else if(dire == ''){
-        alert("La dirección no puede estar vacía.");
-    }else if(ciudad == ''){
-        alert("La ciudad no puedes estar vacía.");
-    }else if(region == 'Seleccione...'){
-        alert("Debe seleccionar una región.")
-    }else if(correo == ''){
-        alert("El correo no puede estar vacío.");
-    }else if(tele == ''){
-        alert("El teléfono no puede estar vacío.");
-    }else if(pass1 == ''){
-        alert("La contraseña no puede estar vacía.");
-    }else if(pass2 == ''){
-        alert("La contraseña no puede estar vacía");
+    var result1 = id_correo.includes("@");
+    var result2 = id_correo.includes(".com"); 
+    var result3 = id_correo.includes(".cl");
+
+    var resultado_final_correo = false;
+    var resultado_final_pass = false;
+
+    var pass = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{8,15}$/;
+    
+    if (result1 && (result2 || result3)) {
+        resultado_final_correo = true;
+    }
+
+    if (id_pass.match(pass)) {
+        resultado_final_pass = true;
+    }
+
+    if (resultado_final_correo && resultado_final_pass) {
+        alert('Login exitoso.');
+        document.getElementById("valido").innerHTML = "Válido";
+        return true;
+    } else {
+        alert('Login incorrecto.');
+        document.getElementById("valido").innerHTML = "Inválido";
+        return false;
+    }
+}
+
+function caracter_registrar (){
+    event.preventDefault();
+    //variables de los input
+    var inputNombre = document.getElementById("inputName1").value;
+    var inputApellido = document.getElementById("inputLastName1").value;
+    var inputRut = document.getElementById("inputRut1").value;
+    var inputDv = document.getElementById("inputDv1").value;
+    var inputDire = document.getElementById("inputDireccion1").value;
+    var inputCiudad = document.getElementById("inputCiudad1").value;
+    var inputRegion = document.getElementById("inputRegion1").value;
+    var inputEmail = document.getElementById("inputEmail2").value;
+    var inputTel = document.getElementById("inputTelefono1").value;
+    var inputCon = document.getElementById("inputPassword1").value;
+    var inpuCond = document.getElementById("inputPassword2").value;
+
+    //variables validación
+    var resultado_rut = false;
+    var resultado_dv1 = /^(?=.*\d|[kK]).{1}$/;
+    var resultado_final_dv = false;
+    var resultado_correo1 = inputEmail.includes("@");
+    var resultado_correo2 = inputEmail.includes(".com"); 
+    var resultado_correo3 = inputEmail.includes(".cl");
+    var resultado_final_correo = false;
+    var resultado_tel = /^.{8}$/;
+    var resultado_final_tel = false;
+
+    //Desarrollo de los If
+    if(inputNombre == ''){
+        alert("El nombre no puede estar vacío")
+    }else if(inputApellido == ''){
+        alert("El apellido no puede estar vacío")
+        }
+
+    if(isNaN(inputRut)){
+        alert("Solo deben ingresarse números")
+        resultado_rut = false;
     }else{
+        resultado_rut = true;
+    } 
+
+    if(!inputDv.match(resultado_dv1)){
+        alert("Ingrese sólo un número o una letra 'k' ")    
+        resultado_final_dv = false;
+    }else{
+        resultado_final_dv = true;
+    }
+
+    if(inputDire == ''){
+        alert("La dirección no puede estar vacía")
+    }else if(inputCiudad == ''){
+        alert("La ciudad no puede estar vacía")
+    }else if(inputRegion == 'Seleccione...'){
+        alert("Debe seleccionar una de las opciones")
+    }
+
+    if(resultado_correo1 && (resultado_correo2 || resultado_correo3)) {
+        resultado_final_correo = true;
+    }
+
+    if(!inputTel.match(resultado_tel)){
+        alert("Ingrese el número sin el +569")
+        resultado_final_tel = false;
+    }else{
+        resultado_final_tel = true;
+    }
+
+    if(inputCon == '' && inpuCond == ''){
+        alert("La contraseña no puede estar vacía")
+    }else if(inputCon != inpuCond){
+        alert("Las contraseñas no coinciden")
+    }
+    
+    else{
         document.getElementById("validado").submit();
     }
 }
 
-function contacto(){
-    event.preventDefault(); //Sirve para prevenir el comportamiento por defecto 
-    //Tomar cada variable del formulario de contacto 
-    var Nombre = document.getElementById("inputNombre1").value;
-    var Correo = document.getElementById("inputCorreo1").value;
-    var Telefono = document.getElementById("inputTel1").value;
-    var TipoCons = document.getElementById("inputCon").value;
-    var Consulta = document.getElementById("inputArea1").value;
+function caracter_contacto(){
+    event.preventDefault();
+    //variables de los input
+    var inputNombre = document.getElementById("inputNombre1").value;
+    var inputEmail = document.getElementById("inputCorreo1").value;
+    var inputTel = document.getElementById("inputTel1").value;
+    var inputTipoCon = document.getElementById("inputCon1").value;
+    var inputConsu  = document.getElementById("inputArea1").value;
 
-    //Crear mensaje visible en la consola, para ver si está todo ok. (Esto es al inspeccionar)
-    console.log("Mensaje desde la consola: ");
-    console.log("Nombre: "+Nombre+", Correo: "+Correo+", Telefono: "+Telefono+", Tipo Consulta: "+Consulta);
+    //variables Validación
+    var resultado_correo1 = inputEmail.includes("@");
+    var resultado_correo2 = inputEmail.includes(".com"); 
+    var resultado_correo3 = inputEmail.includes(".cl");
+    var resultado_final_correo = false;
+    var resultado_tel = /^.{8}$/;
+    var resultado_final_tel = false;
 
+    //Desarrollo de los If
+    if(inputNombre == ''){
+        alert("El nombre no puede estar vacío")
+    }
 
-//Validar con los if, que exista algún caracter dentro de las variables
-if(Nombre == ''){
-    alert("El nombre no puede estar vacío.");
-}else if(Correo == ''){
-    alert("El correo no puede estar vacío.");
-}else if(Telefono == ''){
-    alert("El teléfono no puede estar vacío");
-}else if(TipoCons =='Seleccione...'){
-    alert("Debe seleccionar un tipo de consulta");
-}else if(Consulta == ''){
-    alert("La consulta no puede estar vacía");
-}else{
-    document.getElementById("ContactoForm").submit();
+    if(resultado_correo1 && (resultado_correo2 || resultado_correo3)) {
+        resultado_final_correo = true;
+    }
+
+    if(!inputTel.match(resultado_tel)){
+        alert("Ingrese el número sin el +569")
+        resultado_final_tel = false;
+    }else{
+        resultado_final_tel = true;
+    }
+
+    if(inputTipoCon == 'Seleccione...'){
+        alert("Debe seleccionar una de las opciones")
+    }else if (inputConsu == ''){
+        alert("La consulta no puee estar vacía")
+    }else{
+        document.getElementById("ContactoForm").submit();
+    }
 }
-}
+
+
+
 
