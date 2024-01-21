@@ -129,6 +129,7 @@ function caracter_registrar (){
 }
 
 function caracter_contacto(){
+    event.preventDefault();
     //variables de los input
     var inputNombre = document.getElementById("inputNombre1").value;
     var inputEmail = document.getElementById("inputCorreo1").value;
@@ -137,9 +138,7 @@ function caracter_contacto(){
     var inputConsu  = document.getElementById("inputArea1").value;
 
     //variables Validación
-    var resultado_correo1 = inputEmail.includes("@");
-    var resultado_correo2 = inputEmail.includes(".com"); 
-    var resultado_correo3 = inputEmail.includes(".cl");
+    var resultado_correo = /^(?=.*[@]).*\.(com|cl)$/i;
     var resultado_final_correo = false;
     var resultado_tel = /^.{8}$/;
     var resultado_final_tel = false;
@@ -149,7 +148,10 @@ function caracter_contacto(){
         alert("El nombre no puede estar vacío")
     }
 
-    if(resultado_correo1 && (resultado_correo2 || resultado_correo3)) {
+    if(!inputEmail.match(resultado_correo)) {
+        alert("No ha ingresado correctamente su correo")
+        resultado_final_correo = false;
+    }else{
         resultado_final_correo = true;
     }
 
