@@ -129,12 +129,11 @@ function caracter_registrar (){
 }
 
 function caracter_contacto(){
-    event.preventDefault();
     //variables de los input
     var inputNombre = document.getElementById("inputNombre1").value;
     var inputEmail = document.getElementById("inputCorreo1").value;
     var inputTel = document.getElementById("inputTel1").value;
-    var inputTipoCon = document.getElementById("inputCon1").value;
+    var inputTipoCon = document.getElementById("inputCon").value;
     var inputConsu  = document.getElementById("inputArea1").value;
 
     //variables Validación
