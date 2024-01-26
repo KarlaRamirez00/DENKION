@@ -1,0 +1,49 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Denkion</title>
+</head>
+<body>
+    <h1>Editar Productos</h1>
+    <br>
+    <button type="button">
+        <a href="{% url 'productos_add' %}">Agregar</a>
+    </button>
+    <div id="idMensajes">
+        {% if mensaje %}
+            {{mensaje}}
+        {% endif %}
+    </div>
+    <br>
+    <table>
+        {% if productos %}
+        <thead>
+            <th>Modelo</th>
+            <th>Marca</th>
+            <th>A&ntilde;o</th>
+            <th>Modificar</th>
+            <th>Eliminar</th>
+        </thead>
+            {% for x in productos %}
+                <tr>
+                    <td>{{ x.modelo }}</td>
+                    <td>{{ x.marca }}</td>
+                    <td>{{ x.anno_fab }}</td>
+                </tr>
+            {% endfor %}
+        {% endif %}
+    </table>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+<script>
+    $(document).ready(function(){
+        $("#idMensajes").delay(2000).fadeOut("slow");
+    });
+</script>
+</body>
+</html>

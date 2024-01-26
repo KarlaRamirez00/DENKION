@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Denkion</title>
+</head>
+<body>
+    <h1>Formulario Agregar Productos</h1>
+    <br><br>
+ <form action="" method = "POST">
+    {% csrf_token %}
+    {{ form.as_ul}}
+    <input type="submit" value="Agregar">
+ </form>  
+ <br>
+ <div id="idMensajes">
+    {% if mensaje %}
+    {{mensaje}}
+    {% endif %}
+ </div> 
+ <br>
+ <a href="{% url 'crud_productos' %}">Volver</a>
+</body>
+</html>
