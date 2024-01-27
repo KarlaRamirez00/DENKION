@@ -20,18 +20,18 @@
     <br>
     <table>
         {% if productos %}
-        <thead>
             <th>Modelo</th>
             <th>Marca</th>
             <th>A&ntilde;o</th>
             <th>Modificar</th>
             <th>Eliminar</th>
-        </thead>
             {% for x in productos %}
                 <tr>
                     <td>{{ x.modelo }}</td>
                     <td>{{ x.marca }}</td>
                     <td>{{ x.anno_fab }}</td>
+                    <td><a href="{% url 'productos_edit' pk=x.id_producto %}">Modificar</a></td>
+                    <td><a href="{% url 'productos_del' pk=x.id_producto %}">Eliminar</a></td>
                 </tr>
             {% endfor %}
         {% endif %}

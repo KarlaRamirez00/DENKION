@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Denkion</title>
+</head>
+<body>
+    {% if producto %}
+        <h1>Modificar producto</h1>
+
+        <form action="{% url 'productosUpdate' %}" method="POST">
+            {% csrf_token %}
+
+            <pre>Modelo: <input type="text" name="modelo" value="{{producto.modelo}}"></pre>
+            <pre>Marca: <input type="text" name="marca" value="{{producto.marca}}"></pre>
+            <pre>A&ntilde;o fabricaci&oacute;n: <input type="text" name="anno_fab" value="{{producto.anno_fab}}"></pre>
+            <pre>Precio: <input type="text" name="precio" value="{{producto.precio}}"></pre>
+            <pre>Stock: <input type="text" name="stock" value="{{producto.stock}}"></pre>
+            <pre>Estado: <input type="text" name="estado" value="{{producto.estado}}"></pre>
+            <pre>Categoria: <input type="text" name="categoria" value="{{producto.categoria}}"></pre>
+            <pre>Descripci&oacute;n: <input type="text" name="desc" value="{{producto.desc}}"></pre>
+            <input type="submit" name="opcion" value="Actualizar">
+        </form>
+        <br>
+    {% endif %}
+    <div id="idMensajes">
+        {% if mensaje %}
+            {{mensaje}}
+        {% endif %}
+    </div>
+    <br>
+    <a href="{%url 'crud_productos' %}">Volver</a>
+</body>
+</html>
