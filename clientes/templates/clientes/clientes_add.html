@@ -29,7 +29,7 @@
 <!--FIN Barra de navegación-->    
 
 <div class="container mt-4">
-        <h1 class="titulo text-center">Formulario Agregar Productos</h1>
+        <h1 class="titulo text-center">Formulario Agregar Clientes</h1>
         <br><br>
     <form action="" method = "POST" class="text-center jus-form">
         {% csrf_token %}
@@ -37,72 +37,106 @@
         <div class="form-group">
             <div class="input-group">
                 <div class="input-group-prepend">
-                    <span class="input-group-text">Modelo</span>
+                    <span class="input-group-text">Rut</span>
                 </div>
-                <input type="text" name="modelo" value="{{producto.modelo}}" class="form-control">
+                <input type="number" name="rut" value="{{cliente.rut}}" class="form-control">
             </div>
         </div>
 
         <div class="form-group">
             <div class="input-group">
                 <div class="input-group-prepend">
-                    <span class="input-group-text">Marca</span>
+                    <span class="input-group-text">DV</span>
                 </div>
-                <input type="text" name="marca" value="{{producto.marca}}" class="form-control">
+                <input type="text" name="dv" value="{{cliente.dv}}" class="form-control">
             </div>
         </div>
         <div class="form-group">
             <div class="input-group">
                 <div class="input-group-prepend">
-                    <span class="input-group-text">A&ntilde;o fabricaci&oacute;n</span>
+                    <span class="input-group-text">Contrase&ntilde;a</span>
                 </div>
-                <input type="text" name="anno_fab" value="{{producto.anno_fab}}" class="form-control">
+                <input type="password" name="password" value="{{cliente.password}}" class="form-control">
             </div>
         </div>
         <div class="form-group">
             <div class="input-group">
                 <div class="input-group-prepend">
-                    <span class="input-group-text">Precio</span>
+                    <span class="input-group-text">Correo</span>
                 </div>
-                <input type="text" name="precio" value="{{producto.precio}}" class="form-control">
+                <input type="email" name="email" value="{{cliente.email}}" class="form-control">
             </div>
         </div>
         <div class="form-group">
             <div class="input-group">
                 <div class="input-group-prepend">
-                    <span class="input-group-text">Stock</span>
+                    <span class="input-group-text">Nombre</span>
                 </div>
-                <input type="text" name="stock" value="{{producto.stock}}" class="form-control">
+                <input type="text" name="first_name" value="{{cliente.first_name}}" class="form-control">
             </div>
         </div>
         <div class="form-group">
             <div class="input-group">
                 <div class="input-group-prepend">
-                    <span class="input-group-text">Estado</span>
+                    <span class="input-group-text">Apellido Paterno</span>
                 </div>
-                <select name="estado" class="custom-select">
-                    {% for choice_value, choice_label in estado_choices %}
-                        <option value="{{ choice_value}}" {% if producto.estado == choice_value %}selected{% endif %}>
-                            {{ choice_label }}
-                        </option>
-                    {% endfor %}
-                </select>
+                <input type="text" name="last_name" value="{{cliente.last_name}}" class="form-control">
             </div>
         </div>
         <div class="form-group">
             <div class="input-group">
                 <div class="input-group-prepend">
-                    <span class="input-group-text">Categor&iacute;a</span>
+                    <span class="input-group-text">Apellido Materno</span>
                 </div>
-                <input type="text" name="categoria" value="{{producto.categoria}}" class="form-control">
+                <input type="text" name="ap_materno" value="{{cliente.ap_materno}}" class="form-control">
             </div>
         </div>
         <div class="form-group">
             <div class="input-group">
                 <div class="input-group-prepend">
-                    <span class="input-group-text">Descripci&oacute;n</span>
+                    <span class="input-group-text">Fecha de nacimiento</span>
                 </div>
-                <input type="text" name="desc" value="{{producto.desc}}" class="form-control">
+                <input type="date" name="fec_nac" value="{{cliente.fec_nac|date:'Y-m-d'}}" class="form-control">
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">Tel&eacute;fono</span>
+                </div>
+                <input type="tel" name="tele" value="{{cliente.tele}}" class="form-control">
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">Regi&oacute;n</span>
+                </div>
+                <input type="text" name="region" value="{{cliente.region}}" class="form-control">
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">Ciudad</span>
+                </div>
+                <input type="text" name="ciudad" value="{{cliente.ciudad}}" class="form-control">
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">Comuna</span>
+                </div>
+                <input type="text" name="comuna" value="{{cliente.comuna}}" class="form-control">
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">Direcci&oacute;n</span>
+                </div>
+                <input type="text" name="dire" value="{{cliente.dire}}" class="form-control">
             </div>
         </div>
         <div class="form-row">
@@ -114,7 +148,7 @@
             <div class="form-group col-md-6">
                 <div class="text-center">
                     <button type="button" class="btn btn-info btn-lg" style="color: aliceblue;font-family: Verdana, Geneva, Tahoma, sans-serif;">
-                        <a href="{% url 'crud_productos' %}" style="color: aliceblue;">Volver</a>
+                        <a href="{% url 'crud_clientes' %}" style="color: aliceblue;">Volver</a>
                     </button>
                 </div>
             </div>

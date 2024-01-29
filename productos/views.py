@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .models import Producto
 from django.contrib.auth.decorators import login_required
 from .forms import ProductoForm
@@ -15,7 +15,7 @@ def productos_ag(request):
 
     if request.method == "POST":
         form = ProductoForm(request.POST)
-        if form.is_valid:
+        if form.is_valid():
             print ("estoy en si es válido")
             form.save()
 
@@ -26,48 +26,21 @@ def productos_ag(request):
             return render(request, "productos/productos_add.html", context)
     else:
         form = ProductoForm()
-        context = {'form':form}
+        context = {'form':form, 'estado_choices':Producto.estado_choices}
         return render (request, 'productos/productos_add.html', context)
     
 def productos_edit(request, pk):
-    if pk != "":
-        producto=Producto.objects.get(id_producto=pk)
-        context={'producto':producto}
-        if producto:
-            return render(request, 'productos/productos_edit.html', context)
-        else:
-            context={'mensaje':"Lo lamentamos, no existe tal producto."}
-            return render(request, 'productos/productos_list.html', context)
-    else:
-        context={}
-        return render(request, 'productos/productos_list.html', context)
-    
-def productosUpdate(request):
+    producto = Producto.objects.get(id_producto=pk)
     if request.method == "POST":
-        modelo=request.POST["modelo"]
-        marca=request.POST["marca"]
-        anno_fab=request.POST["anno_fab"]
-        precio=request.POST["precio"]
-        stock=request.POST["stock"]
-        estado=request.POST["estado"]
-        categoria=request.POST["categoria"]
-        desc=request.POST["desc"]
-        producto = Producto()
-        producto.modelo=modelo
-        producto.marca=marca
-        producto.anno_fab=anno_fab
-        producto.precio=precio
-        producto.stock=stock
-        producto.estado=estado
-        producto.categoria=categoria
-        producto.desc=desc
-        producto.save()
-        context={'mensaje':"Perfecto! Datos actualizados exitosamente", 'producto':producto}
-        return render(request, 'productos/productos_list.html', context)
+        form = ProductoForm(request.POST, instance=producto)
+        if form.is_valid():
+            form.save()
+            return redirect('productos_edit', pk=pk)
     else:
-        productos = Producto.objects.all()
-        context ={'productos':productos}
-        return render(request, 'productos/productos_list.html', context)
+        form = ProductoForm(instance=producto)
+        context = {'producto': producto, 'form': form}
+        return render(request, 'productos/productos_edit.html', context)
+    
     
 def productos_del(request, pk):
     mensajes=[]

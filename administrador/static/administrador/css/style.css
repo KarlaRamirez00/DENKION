@@ -167,3 +167,18 @@ body{
 .custom-btn{
     text-align: center;
 }
+
+.jus_form{
+    text-align: justify;
+    max-width: 100vh;
+}
+
+.jus_form .form-control{
+    width: 100%;
+}
+
+.table-container{
+    max-height: 15%;
+    overflow-y: auto;
+}
+

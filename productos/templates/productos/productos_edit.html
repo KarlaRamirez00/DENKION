@@ -9,56 +9,119 @@
     <link href="{% static 'administrador/css/style.css' %}" rel="stylesheet">
 </head>
 <body>
-    <div class="container mt-4">
-    {% if producto %}
-        <h1 class="titulo text-center">Modificar producto</h1>
 
-        <form action="{% url 'productosUpdate' %}" method="POST" class="text-center">
+ <!--Barra de navegación-->
+ <nav class="navbar navbar-expand-lg navbar-light">
+    <a class="navbar-brand" href="{% url 'index' %}">
+    <img src="{% static 'administrador/img/Denki_logo60h206w.png' %}" alt="Logo" width="206" height="60" class="d-inline-block align-top">
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item"><a class="nav-link" href="{% url 'crud_productos' %}">Productos</a></li>
+            <li class="nav-item"><a class="nav-link" href="{% url 'crud_clientes' %}">Clientes</a></li>
+            <li class="nav-item"><a class="nav-link" href="#">Boletas</a></li>            
+        </ul>
+    </div>
+</nav>
+<!--FIN Barra de navegación-->
+
+    <div class="container mt-4">
+        {% if producto %}
+        <h1 class="titulo text-center">Modificar producto</h1>
+        <br>
+        <form action="{% url 'productos_edit' pk=producto.id_producto %}" method="POST" class="text-center jus-form">
             {% csrf_token %}
                 <div class="form-group">
-                    <label for="input_modelo">Modelo</label>
-                    <input type="text" name="modelo" value="{{producto.modelo}}" id="input_modelo">
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">Modelo</span>
+                        </div>
+                        <input type="text" name="modelo" value="{{producto.modelo}}"class="form-control">
+                    </div>
                 </div>
                 <div class="form-group">
-                    <label for="input_marca">Marca</label>
-                    <input type="text" name="marca" value="{{producto.marca}}" id="input_marca">
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">Marca</span>
+                        </div>
+                        <input type="text" name="marca" value="{{producto.marca}}"class="form-control">
+                    </div>
                 </div>
                 <div class="form-group">
-                    <label for="input_anno">A&ntilde;o fabricaci&oacute;n</label>
-                    <input type="number" name="anno" value="{{producto.anno_fab}}" id="input_anno">
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">A&ntilde;o fabricaci&oacute;n</span>
+                        </div>
+                        <input type="number" name="anno_fab" value="{{producto.anno_fab}}"class="form-control">
+                    </div>
                 </div>
                 <div class="form-group">
-                    <label for="input_precio">Precio</label>
-                    <input type="number" name="precio" value="{{producto.precio}}" id="input_precio">
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">Precio</span>
+                        </div>
+                        <input type="number" name="precio" value="{{producto.precio}}" class="form-control">
+                    </div>
                 </div>
                 <div class="form-group">
-                    <label for="input_stock">Stock</label>
-                    <input type="number" name="stock" value="{{producto.stock}}" id="input_stock">
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">Stock</span>
+                        </div>
+                        <input type="number" name="stock" value="{{producto.stock}}" class="form-control">
+                    </div>
                 </div>
                 <div class="form-group">
-                    <label for="input_estado">Estado</label>
-                    <input type="text" name="estado" value="{{producto.estado}}" id="input_estado">
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">Estado</span>
+                        </div>
+                        <input type="text" name="estado" value="{{producto.estado}}"class="form-control">
+                    </div>
                 </div>
                 <div class="form-group">
-                    <label for="input_cat">Categor&iacute;a</label>
-                    <input type="text" name="cate" value="{{producto.categoria}}" id="input_cat">
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">Categor&iacute;a</span>
+                        </div>
+                        <input type="text" name="categoria" value="{{producto.categoria}}"class="form-control">
+                    </div>
                 </div>
                 <div class="form-group">
-                    <label for="input_des">Descripci&oacute;n</label>
-                    <input type="text" name="des" value="{{producto.desc}}" id="input_des">
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">Descripci&oacute;n</span>
+                        </div>
+                        <input type="text" name="desc" value="{{producto.desc}}"class="form-control">
+                    </div>
                 </div>
-            </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <div class="text-center">
+                                <button type="submit" class="btn btn-info btn-lg" name="opcion" style="font-family: Verdana, Geneva, Tahoma, sans-serif; background-color: #1b3248;">Actualizar</button>
+                        </div>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <div class="text-center">
+                            <button type="button" class="btn btn-info btn-lg" style="color: aliceblue;font-family: Verdana, Geneva, Tahoma, sans-serif;">
+                                <a href="{% url 'crud_productos' %}" style="color: aliceblue;">Volver</a>
+                            </button>
+                        </div>
+                    </div>
+                </div>
         </form>
-    </div>
         <br>
-    {% endif %}
-    <div id="idMensajes">
-        {% if mensaje %}
-            {{mensaje}}
         {% endif %}
+        <div id="idMensajes">
+            {% if mensaje %}
+                {{mensaje}}
+            {% endif %}
+        </div>
+        <br>
     </div>
-    <br>
-    <a href="{%url 'crud_productos' %}">Volver</a>
 <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>

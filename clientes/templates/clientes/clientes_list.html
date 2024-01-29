@@ -29,7 +29,7 @@
 <!--FIN Barra de navegación-->
 <div class="table-container">
     <div class="container mt-4">
-        <h1 class="titulo text-center">Lista de productos</h1>
+        <h1 class="titulo text-center">Lista de clientes</h1>
         <br>
         
         <div id="idMensajes">
@@ -39,29 +39,29 @@
         </div>
         <br>
         <table class="table table-striped">
-            {% if productos %}
-            <thead class="thead-dark">
-                <th>Modelo</th>
-                <th>Marca</th>
-                <th>A&ntilde;o</th>
+            <thead class="thead-dark">            
+                <th>Rut</th>
+                <th>Nombre</th>
+                <th>Apellido</th>
+                <th>Correo</th>
                 <th>Modificar</th>
-                <th>Eliminar</th>
+                <th>Eliminar</th>            
             </thead>
-                {% for x in productos %}
-                    <tr>
-                        <td>{{ x.modelo }}</td>
-                        <td>{{ x.marca }}</td>
-                        <td>{{ x.anno_fab }}</td>
-                        <td><a href="{% url 'productos_edit' pk=x.id_producto %}">Modificar</a></td>
-                        <td><a href="{% url 'productos_del' pk=x.id_producto %}">Eliminar</a></td>
-                    </tr>
-                {% endfor %}
-            {% endif %}
+            {% for x in clientes %}
+                <tr>
+                    <td>{{ x.rut }}</td>
+                    <td>{{ x.first_name }}</td>
+                    <td>{{ x.last_name }}</td>
+                    <td>{{ x.email }}</td>
+                    <td><a href="{% url 'clientes_edit' pk=x.rut %}">Modificar</a></td>
+                    <td><a href="{% url 'clientes_del' pk=x.rut %}">Eliminar</a></td>
+                </tr>
+            {% endfor %}
         </table>
         <br>
         <div class="text-center">
             <button type="button" class="btn btn-info btn-lg">
-                <a href="{% url 'productos_add' %}" style="color: aliceblue; font-weight: bold;">Agregar</a>
+                <a href="{% url 'clientes_add' %}" style="color: aliceblue; font-weight: bold;">Agregar</a>
             </button>
         </div>
     </div>
