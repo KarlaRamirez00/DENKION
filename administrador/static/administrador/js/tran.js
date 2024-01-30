@@ -1,5 +1,5 @@
 var i = 0;
-var imagenes = ["img/fondo_tocadiscos.jpg", "img/fondo_receiver.jpg", "img/fondo_radio.jpg"]
+var imagenes = ["/static/administrador/img/fondo_tocadiscos.jpg", "/static/administrador/img/fondo_receiver.jpg", "/static/administrador/img/fondo_radio.jpg"]
 var imagen = document.getElementById("imagenf");
 
 function cambioimg (){
