@@ -3,16 +3,18 @@ from .models import Cliente
 from django.contrib.auth.decorators import login_required
 from .forms import ClienteForm
 from django.contrib.auth.hashers import make_password
-from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth import authenticate, login as auth_login
 
 
 # Create your views here.
+@login_required
 def crud_clientes(request):
     clientes = Cliente.objects.all()
     context = {'clientes':clientes}
     print("estoy enviando datos")
     return render(request, "clientes/clientes_list.html", context)
 
+@login_required
 def clientes_ag(request):
     context={}
 
@@ -38,7 +40,8 @@ def clientes_ag(request):
     else:
         context= {}
         return render(request, 'clientes/clientes_add.html', context)
-  
+
+@login_required  
 def clientes_edit(request, pk):
     cliente = Cliente.objects.get(rut=pk)
     if request.method == "POST":
@@ -56,7 +59,8 @@ def clientes_edit(request, pk):
         form = ClienteForm(instance=cliente)
     context = {'cliente': cliente, 'form': form}
     return render(request, 'clientes/clientes_edit.html', context)
-    
+
+@login_required    
 def clientes_del(request, pk):
     mensajes=[]
     errores=[]
@@ -78,7 +82,8 @@ def clientes_del(request, pk):
         mensaje="Lo sentimos! No existe tal cliente"
         context={'mensaje':mensaje, 'clientes':clientes}
         return render (request, 'clientes/clientes_list.html', context)
-    
+
+   
 def login(request):
     if request.method == "POST":
         email = request.POST["email"]
@@ -90,11 +95,11 @@ def login(request):
             login(request, user)
             
             if user.is_staff:
-                return redirect()
+                return redirect('crud_clientes')
             else:
-                return redirect()
+                return render(request, "home/index.html")
         else:
-            return render ()
+            return render (request, "home/index.html")
     return render (request, "clientes/clientes_list.html")        
 
 

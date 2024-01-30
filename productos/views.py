@@ -4,12 +4,14 @@ from django.contrib.auth.decorators import login_required
 from .forms import ProductoForm
 
 # Create your views here.
+@login_required
 def crud_productos(request):
     productos = Producto.objects.all()
     context = {'productos':productos}
     print("estoy enviando datos")
     return render(request, "productos/productos_list.html", context)
 
+@login_required
 def productos_ag(request):
     context={}
 
@@ -28,7 +30,8 @@ def productos_ag(request):
         form = ProductoForm()
         context = {'form':form, 'estado_choices':Producto.estado_choices}
         return render (request, 'productos/productos_add.html', context)
-    
+
+@login_required    
 def productos_edit(request, pk):
     producto = Producto.objects.get(id_producto=pk)
     if request.method == "POST":
@@ -41,7 +44,7 @@ def productos_edit(request, pk):
         context = {'producto': producto, 'form': form}
         return render(request, 'productos/productos_edit.html', context)
     
-    
+@login_required    
 def productos_del(request, pk):
     mensajes=[]
     errores=[]

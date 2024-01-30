@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,7 +12,7 @@
   <!--Barra de navegación-->
   <nav class="navbar navbar-expand-lg navbar-light">
     <a class="navbar-brand" href="#">
-      <img src="{%static 'administrador/img/Denki logo60h206w.png %}" alt="Logo" width="206" height="60">
+      <img src="{%static "administrador/img/Denki logo60h206w.png" %}" alt="Logo" width="206" height="60">
     </a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -84,7 +85,7 @@
       <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
       <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
       <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
-      <script src="{% static 'administrador/js/tran.js %}"></script>
+      <script src="{% static "administrador/js/tran.js" %}"></script>
 
       
 </body>

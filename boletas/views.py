@@ -1,14 +1,17 @@
 from django.shortcuts import render, redirect
 from boletas.models import Boleta
 from .forms import BoletaForm
+from django.contrib.auth.decorators import login_required
 
 # Función para Listar Boletas
+@login_required
 def crud_boletas(request):
     boletas = Boleta.objects.all()
     context = {'boletas': boletas}
     return render(request, "boletas/boletas_list.html", context)
 
 # Función para Agregar Boletas
+@login_required
 def boletas_ag(request):
     if request.method == 'POST':
         form = BoletaForm(request.POST)
@@ -26,6 +29,7 @@ def boletas_ag(request):
         return render(request, "boletas/boletas_add.html", context)
 
 # Función para Eliminar Boletas
+@login_required    
 def boletas_del(request, pk):
     mensajes=[]
     errores=[]
@@ -49,6 +53,7 @@ def boletas_del(request, pk):
         return render (request, "boletas/boletas_list.html", context)
 
 # Función 1 para Editar Boletas
+@login_required    
 def boletas_edit(request, pk):
     try:
         boleta = Boleta.objects.get(id_boleta=pk)
@@ -62,6 +67,7 @@ def boletas_edit(request, pk):
     return render(request, "boletas/boletas_edit.html", context)
 
 # Función 1 para Editar Boletas
+@login_required
 def boletasUpdate(request, pk):
     try:
         boleta = Boleta.objects.get(id_boleta=pk)
