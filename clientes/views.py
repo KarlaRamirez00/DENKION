@@ -3,7 +3,8 @@ from .models import Cliente
 from django.contrib.auth.decorators import login_required
 from .forms import ClienteForm
 from django.contrib.auth.hashers import make_password
-from django.contrib.auth import authenticate, login as auth_login
+from django.contrib.auth import authenticate, login as auth_login, logout as auth_logout
+from django.views.decorators.csrf import csrf_protect
 
 
 # Create your views here.
@@ -83,8 +84,9 @@ def clientes_del(request, pk):
         context={'mensaje':mensaje, 'clientes':clientes}
         return render (request, 'clientes/clientes_list.html', context)
 
-   
-def login(request):
+@csrf_protect   
+def login_view(request):
+    print("entre a la vista de login")
     if request.method == "POST":
         email = request.POST["email"]
         password = request.POST["password"]
@@ -92,14 +94,20 @@ def login(request):
         user = authenticate(request, email=email, password=password)
 
         if user != None:
-            login(request, user)
+            print("Usuario autenticado:", user)
+            auth_login(request, user)
             
             if user.is_staff:
-                return redirect('crud_clientes')
+                return redirect("crud_clientes")
             else:
-                return render(request, "home/index.html")
+                return redirect("index_home")
         else:
             return render (request, "home/index.html")
-    return render (request, "clientes/clientes_list.html")        
+    return render (request, "clientes/clientes_login.html")   
+
+def logout_view(request):
+    auth_logout(request)
+    # Redirige a la página deseada después del cierre de sesión
+    return redirect('index_home')  # o la URL que desees     
 
 

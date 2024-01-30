@@ -21,7 +21,19 @@
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item"><a class="nav-link" href="{% url 'crud_productos' %}">Productos</a></li>
                 <li class="nav-item"><a class="nav-link" href="{% url 'crud_clientes' %}">Clientes</a></li>
-                <li class="nav-item"><a class="nav-link" href="{% url 'crud_boletas' %}">Boletas</a></li>            
+                <li class="nav-item"><a class="nav-link" href="{% url 'crud_boletas' %}">Boletas</a></li>
+                <li class="nav-item-dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                   {% if user.is_authenticated %}
+                       {{user.username}}
+                    {% else %}
+                       <a href="{% url 'login' %}">login</a>
+                    {% endif %}
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="{% url 'logout' %}">Cerrar sesión</a>
+                    </div>
+                </li>            
             </ul>
         </div>
     </nav>
