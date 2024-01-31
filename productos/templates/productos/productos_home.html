@@ -55,7 +55,7 @@
         {% for producto in productos %}
             <div class="col-md-4 col-sm-4 mb-4 mt-4">
                 <div class="card h-100">
-                    <img src="{% static 'administrador/img/fondo800h1201w.jpg' %}" class="card-img-top" alt="Producto{{ forloop.counter }}">
+                    <img src="{% static 'administrador/img/' %}{{ producto.imagen }}" class="card-img-top" alt="Producto{{ forloop.counter }}">
                     <div class="card-body">
                         <h5 class="card-title">Marca: {{ producto.marca }}</h5>
                         <p class="card-text">Modelo: {{ producto.modelo }}</p>
